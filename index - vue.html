@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS通用方法</title>
+	<script src="https://unpkg.com/vue"></script>
+	<style type="text/css">
+		body{
+			width: 40%;
+			height: 100%;
+			/*border: 1px solid;*/
+			margin: 0 auto;
+		}
+	</style>
+	<!-- <script type="text/javascript">
+		var app = new Vue({
+			el: "#app",
+			date: {
+				message: 'hello world!'
+			}
+		})
+	</script> -->
+</head>
+<body>
+	<div id="app-1">
+		<h3>日期格式化：formateDate(date,fmt)</h3>
+		<p>
+			<h4>摘要</h4>
+			<div>把Date类型转换为String类型</div>
+			<h4>参数</h4>
+			<p>
+				<b>date</b>: Date类型，如var date = new Date()
+			</p>
+			<p>
+				<b>fmt</b>: String类型,年 y,月 M,日 d,时 h,分 m,秒 s,季度 q,毫秒 S,如'yyyy--MM-dd'
+			</p>
+			<h4>实例</h4>
+			<p>
+				fmt:<input type="text" id="format-text" v-model="formatText" />&nbsp;&nbsp;&nbsp;
+				<input type="button" id="date-btn" value="转换" v-on:click="formatBtnClick">
+			</p>
+			<p>
+				转换之前:<input type="text" id="format-before" v-model="formatBefore" />&nbsp;&nbsp;&nbsp;
+				结果:<input type="text" id="format-after" v-model="formatAfter" />
+			</p>
+		</p>
+	</div>
+	<br><hr><br>
+	<div id="app-2">
+		<h3>操作cookie：setCookie(name, value, expiredTime),getCookie(name),delCookie =(name)</h3>
+		<p>
+			<h4>摘要</h4>
+			<div>添加、获取、删除cookie</div>
+			<h4>参数</h4>
+			<p>
+				<b>name</b>: cookie名字
+			</p>
+			<p>
+				<b>value</b>: String类型,cookie内容
+			</p>
+			<p>
+				<b>expiredTime</b>: Number类型,过期时间，单位秒
+			</p>
+			<h4>实例</h4>
+			<p>
+				cookie name: <input type="text" v-model="cname" /><br>
+				cookie value: <input type="text" v-model="cvalue" /><br>
+				<input type="button" value="添加" v-on:click="setCk">&nbsp;&nbsp;&nbsp;
+				<input type="button" value="获取" v-on:click="getCk">&nbsp;&nbsp;&nbsp;
+				<input type="button" value="删除" v-on:click="delCk">&nbsp;&nbsp;&nbsp;
+			</p>
+			
+		</p>
+	</div>
+
+
+	<script type="text/javascript" src="formatDate.js"></script>
+	<script type="text/javascript" src="operateCookie.js"></script>
+
+	<script type="text/javascript">
+		var app = new Vue({
+			el: "#app-1",
+			data: {
+				'formatText': 'yyyy--MM-dd hh:mm:ss',
+				'formatBefore': new Date(),
+				'formatAfter': ''
+			},
+			methods:{
+				formatBtnClick:function(){
+					this.formatAfter = formatDate(this.formatBefore,this.formatText) || '转换失败!';
+				}
+			}
+		});
+
+		var app2 = new Vue({
+			el: "#app-2",
+			data: {
+				cname: '',
+				cvalue: ''
+			},
+			methods:{
+				setCk: function(){
+					setCookie(this.cname,this.cvalue,15);
+				},
+				getCk: function(){
+					alert(getCookie(this.cname));
+				},
+				delCk: function(){
+					delCookie(this.name);
+					if(getCookie(name) == undefined){
+						console.log('删除成功');
+					}
+				}
+			}
+		});
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS通用方法</title>
+	<style type="text/css">
+		body{
+			width: 40%;
+			height: 100%;
+			/*border: 1px solid;*/
+			margin: 0 auto;
+		}
+		
+	</style>
+
+</head>
+<body>
+	<h3>日期格式化：formateDate(date,fmt)</h3>
+	<p>
+		<h4>摘要</h4>
+		<div>把Date类型转换为String类型</div>
+		<h4>参数</h4>
+		<p>
+			<b>date</b>: Date类型，如var date = new Date()
+		</p>
+		<p>
+			<b>fmt</b>: String类型,年 y,月 M,日 d,时 h,分 m,秒 s,季度 q,毫秒 S,如'yyyy--MM-dd'
+		</p>
+		<h4>实例</h4>
+		<p>
+			fmt:<input type="text" id="format-text" value="yyyy--MM-dd hh:mm:ss" />&nbsp;&nbsp;&nbsp;<input type="button" id="date-btn" value="转换">
+		</p>
+		<p>
+			转换之前:<input type="text" id="format-before" />&nbsp;&nbsp;&nbsp;结果:<input type="text" id="format-after" />
+		</p>
+	</p>
+
+	<script type="text/javascript" src="formatDate.js"></script>
+	
+
+	<script type="text/javascript">
+		document.querySelector("#date-btn").addEventListener("click",function(){
+			var date = new Date();
+			document.querySelector("#format-before").value = date;
+			var fmt = document.querySelector("#format-text").value;
+			var after;
+			after = formatDate(date,fmt);
+			if(after != undefined){
+				document.querySelector("#format-after").value = after;
+			}
+			else{
+				document.querySelector("#format-after").value = "转换失败！";
+			}
+		});
+		
+	</script>
+</body>
+</html>
