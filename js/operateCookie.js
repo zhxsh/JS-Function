@@ -16,14 +16,7 @@ var getCookie = function (name) {
 }
 //删除cookie
 var delCookie = function (name) {
-    var result;
-    try{
-        result = this.getCookie(name);
-    }
-    catch(e){
-        console.log(e)
-    }
-    // var result = getCookie(name);
+    var result = this.getCookie(name);
     if (result) {
         var exp = new Date();
         exp.setTime(exp.getDate() - 1);
