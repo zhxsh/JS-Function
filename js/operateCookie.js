@@ -6,7 +6,7 @@ var setCookie = function (name, value, expiredTime) {
     expiredTime = (expiredTime == null || expiredTime) ? "" : ";expires=" + date.toUTCString();
     document.cookie = name + "=" + escape(value) + expiredTime + ";path=/";
 }
-//获取cookie      Chrome下获取失败，IE、Firefox正常
+//获取cookie      Chrome设置正常，获取失败，IE、Firefox都正常
 var getCookie = function (name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     if (arr = document.cookie.match(reg))
