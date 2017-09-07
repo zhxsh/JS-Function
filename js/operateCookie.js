@@ -1,11 +1,12 @@
 /*  设置cookie @expireTime 多少秒    */
+
 var setCookie = function (name, value, expiredTime) {
     var date = new Date();
     date.setSeconds(date.getDate() + expiredTime);
     expiredTime = (expiredTime == null || expiredTime) ? "" : ";expires=" + date.toUTCString();
     document.cookie = name + "=" + escape(value) + expiredTime + ";path=/";
 }
-//获取cookie
+//获取cookie      Chrome下获取失败，IE、Firefox正常
 var getCookie = function (name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     if (arr = document.cookie.match(reg))
@@ -15,7 +16,14 @@ var getCookie = function (name) {
 }
 //删除cookie
 var delCookie = function (name) {
-    var result = this.getCookie(name);
+    var result;
+    try{
+        result = this.getCookie(name);
+    }
+    catch(e){
+        console.log(e)
+    }
+    // var result = getCookie(name);
     if (result) {
         var exp = new Date();
         exp.setTime(exp.getDate() - 1);

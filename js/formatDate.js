@@ -1,5 +1,6 @@
 // date: Date类型，如var date = new Date()
 // fmt: String类型,年 y,月 M,日 d,时 h,分 m,秒 s,季度 q,毫秒 S,如'yyyy--MM-dd'
+
 var formatDate = function(date,fmt){
 	var o = {
         "M+": date.getMonth() + 1, //月份 

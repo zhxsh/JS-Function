@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>JS通用方法</title>
+	<title>JS小方法</title>
 	<script src="https://unpkg.com/vue"></script>
 	<style type="text/css">
 		body{
@@ -11,17 +11,35 @@
 			/*border: 1px solid;*/
 			margin: 0 auto;
 		}
+		table{
+			border: 1px solid;
+			border-collapse: collapse;
+		}
+		td{
+			border: 1px solid;
+
+		}
 	</style>
-	<!-- <script type="text/javascript">
-		var app = new Vue({
-			el: "#app",
-			date: {
-				message: 'hello world!'
-			}
-		})
-	</script> -->
 </head>
 <body>
+	<!-- <div id="app-">
+		<h3></h3>
+		<p>
+			<h4>摘要</h4>
+			<div></div>
+			<h4>参数</h4>
+			<p>
+				<b></b>: 
+			</p>
+			
+			<h4>实例</h4>
+			<p>
+				: <input type="text" v-model="cvalue" /><br>
+				<input type="button" value="添加" v-on:click="setCk">&nbsp;&nbsp;&nbsp;
+			</p>
+		</p>
+	</div> -->
+
 	<div id="app-1">
 		<h3>日期格式化：formateDate(date,fmt)</h3>
 		<p>
@@ -40,14 +58,15 @@
 				<input type="button" id="date-btn" value="转换" v-on:click="formatBtnClick">
 			</p>
 			<p>
-				转换之前:<input type="text" id="format-before" v-model="formatBefore" />&nbsp;&nbsp;&nbsp;
+				转换前:<input type="text" id="format-before" v-model="formatBefore" />&nbsp;&nbsp;&nbsp;
 				结果:<input type="text" id="format-after" v-model="formatAfter" />
 			</p>
 		</p>
 	</div>
 	<br><hr><br>
+
 	<div id="app-2">
-		<h3>操作cookie：setCookie(name, value, expiredTime),getCookie(name),delCookie =(name)</h3>
+		<h3>操作cookie：setCookie(name, value, expiredTime),getCookie(name),delCookie(name)</h3>
 		<p>
 			<h4>摘要</h4>
 			<div>添加、获取、删除cookie</div>
@@ -72,10 +91,44 @@
 			
 		</p>
 	</div>
+	<br><hr><br>
+
+	<div id="app-3">
+		<h3>导出表格内容到Excel: exportExcel(id,name)</h3>
+		<p>
+			<h4>摘要</h4>
+			<div>导出html页面中的表格</div>
+			<h4>参数</h4>
+			<p>
+				<b>id</b>: table的id 
+			</p>
+			<p>
+				<b>name</b>: 导出后的Excel文件名 
+			</p>
+			
+			<h4>实例</h4>
+			<p>
+				<table id="people">
+					<tr>
+						<td>姓名</td>
+						<td>性别</td>
+						<td>年龄</td>
+					</tr>
+					<tr v-for="item in items">
+						<td>{{item.name}}</td>
+						<td>{{item.sex}}</td>
+						<td>{{item.age}}</td>
+					</tr>
+				</table>
+				<input type="button" value="导出" v-on:click="exportTable">&nbsp;&nbsp;&nbsp;
+			</p>
+		</p>
+	</div>
 
 
-	<script type="text/javascript" src="formatDate.js"></script>
-	<script type="text/javascript" src="operateCookie.js"></script>
+	<script type="text/javascript" src="js/formatDate.js"></script>
+	<script type="text/javascript" src="js/operateCookie.js"></script>
+	<script type="text/javascript" src="js/exportExcel.js"></script>
 
 	<script type="text/javascript">
 		var app = new Vue({
@@ -101,15 +154,40 @@
 			methods:{
 				setCk: function(){
 					setCookie(this.cname,this.cvalue,15);
+					if(getCookie(this.cname) != null){
+						alert("添加成功");
+					}
 				},
 				getCk: function(){
 					alert(getCookie(this.cname));
 				},
 				delCk: function(){
-					delCookie(this.name);
-					if(getCookie(name) == undefined){
-						console.log('删除成功');
+					if(getCookie(this.cname) != null){
+						delCookie(this.cname);
+						if(getCookie(this.cname) == null){
+							alert('删除成功');
+						}
 					}
+					else{
+						alert("Cookie不存在")
+					}
+					
+				}
+			}
+		});
+
+		var app3 = new Vue({
+			el: "#app-3",
+			data: {
+				items:[
+				{name:"john",sex:"boy",age:"15"},
+				{name:"tom",sex:"boy",age:"14"},
+				{name:"sara",sex:"girl",age:"17"}
+				]
+			},
+			methods: {
+				exportTable: function(){
+					exportExcel("people","信息");
 				}
 			}
 		});
