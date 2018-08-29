@@ -9,8 +9,17 @@ export default {
             }
             // let clientWidth = document.body.clientWidth;
             let clientWidth = window.innerWidth;
+            
+            var w=window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
+
+            var h=window.innerHeight
+            || document.documentElement.clientHeight
+            || document.body.clientHeight;
+            
             ready = true;
-            console(((clientWidth/1337)*12).toString())
+            console(((w/1337)*12).toString())
         }
         function handler2(){
             console.log("resize");
